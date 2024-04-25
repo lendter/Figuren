@@ -1,28 +1,45 @@
 package figur;
 
-import form.Dreieck;
+import java.util.Scanner;
+
 import form.EForm;
+import form.Form;
 import form.Kreis;
-import form.Rechteck;
 import form.Vieleck;
+import utils.Creatür;
 import utils.FormFactory;
 
 public class FigurFactory {
 	
-	public static Figur createFigur(EFigur figur) throws Exception {
+	
+	public static Figur<?> createFigur(EFigur figur, Scanner scanner, Creatür creator) throws Exception {
 		switch(figur) {
-		case GeradeKegel:
-			return new GeradeKegel<Kreis>((Kreis) FormFactory.createForm(EForm.KREIS), 4);
-		case Pyramide:
-			return new Pyramide<Dreieck>((Dreieck)FormFactory.createForm(EForm.DREIECK), 4);
-		case GeradePyramide:
-			return new GeradePyramide<Vieleck>((Vieleck) FormFactory.createForm(EForm.VIELECK), 49);
-		case GeradesPrisma:
-			return new GeradesPrisma<Rechteck>((Rechteck)FormFactory.createForm(EForm.RECHTECK), 4);
-		case Kugel:
-			return new Kugel<Kreis>((Kreis) FormFactory.createForm(EForm.KREIS));
-		default:
-			return null;
-		}
+			case GeradeKegel:
+				Kreis kreis = (Kreis)creator.formErstellen(new EForm[] {EForm.KREIS});
+				System.out.print("Hoehe des Kegels: ");
+				double kegelHoehe = scanner.nextDouble();
+				return new GeradeKegel<>(kreis, kegelHoehe);
+			case Pyramide:
+				Form form = creator.formErstellen(EForm.values());
+				System.out.print("Hoehe der Pyramide: ");
+				double hoehe = scanner.nextDouble();
+				return new Pyramide<>(form, hoehe);
+			case GeradePyramide:
+				Vieleck vieleck = (Vieleck)creator.formErstellen(new EForm[] {EForm.VIELECK});
+				System.out.print("Hoehe der geraden Pyramide: ");
+				double gPyraHoehe = scanner.nextDouble();
+				return new GeradePyramide<>(vieleck, gPyraHoehe);
+			case GeradesPrisma:
+				Form grundflaeche = creator.formErstellen(EForm.values());
+				System.out.print("Hoehe des geraden Prismas: ");
+				double prismaHoehe = scanner.nextDouble();
+				return new GeradesPrisma<>(grundflaeche, prismaHoehe);
+			case Kugel:
+				System.out.print("Radius der Kugel: ");
+				double[] kugelData = {scanner.nextDouble()};
+				return new Kugel<>(FormFactory.createForm(EForm.KREIS, kugelData));
+			default:
+				return null;
+			}
 	}
 }

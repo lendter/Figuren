@@ -1,5 +1,7 @@
 package utils;
 
+import java.util.Scanner;
+
 import figur.EFigur;
 import figur.Figur;
 import figur.FigurFactory;
@@ -8,29 +10,29 @@ import form.Form;
 
 public class Main {
 
-    public static void main(String[] args) {
-        try {
-            for (EForm eForm: EForm.values()) {
-                Form form = FormFactory.createForm(eForm);
-                System.out.println("FORM: "+eForm);
-                System.out.println("UMFANG: "+Math.round(form.umfang()));
-                System.out.println("FLAECHE: "+Math.round(form.flaeche()));
-                System.out.println();
-            }
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-        try {
-            for (EFigur eFigur: EFigur.values()) {
-                Figur figur = FigurFactory.createFigur(eFigur);
-                System.out.println("FIGUR: "+eFigur);
-                System.out.println("VOLUMEN: "+Math.round(figur.volumen()));
-                System.out.println("OBERFLAECHE: "+Math.round(figur.oberflaeche()));
-                System.out.println();
-            }
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-        
-    }
+	private static Scanner scan = new Scanner(System.in);
+	
+	public static void main(String[] args) {
+		Creatür creator = new Creatür(scan);
+		System.out.println("Das berühren der Figüren mit den Pfoten ist verboten!");
+		try {
+			int input;
+			do {
+				System.out.println("Hauptmenü:");
+				System.out.println("[1] Form erstellen [2] Figur erstellen [3] Exit");
+				input = scan.nextInt();
+				switch (input) {
+				case 1:
+					creator.formErstellen(EForm.values());
+					break;
+				case 2:
+					creator.figurErstellen();
+					break;
+				}
+
+			}while(input != 3);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
 }
