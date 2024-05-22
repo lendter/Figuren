@@ -1,6 +1,5 @@
 package utils;
 
-import java.util.List;
 import java.util.Scanner;
 
 import figur.EFigur;
@@ -36,7 +35,7 @@ public class Creatür {
 		return null;
 	}
 
-	public void figurErstellen() {
+	public Figur<?>  figurErstellen() {
 		System.out.println("Figuren erstellen: \n Wähle aus Figuren:");
 		try {
 			for (EFigur eFigur : EFigur.values()) {
@@ -45,11 +44,13 @@ public class Creatür {
 			EFigur input = EFigur.valueOfNumber(scan.nextInt());
 			Figur<?> figur = FigurFactory.createFigur(input, scan, this);
 			System.out.println("FIGUR: " + input);
-			System.out.println("VOLUMEN: " + Math.round(figur.volumen()));
-			System.out.println("OBERFLÄCHE: " + Math.round(figur.oberflaeche()));
-			System.out.println();
+			System.out.println("VOLUMEN: " + figur.volumen());
+			System.out.println("OBERFLÄCHE: " + figur.oberflaeche());
+			System.out.println("");
+			return figur;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return null;
 	}
 }

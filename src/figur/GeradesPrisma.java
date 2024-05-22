@@ -12,12 +12,12 @@ public class GeradesPrisma<F extends Form> extends Figur<F>{
 
 	@Override
 	public double volumen() {
-		return getForm().flaeche() * getHoehe();
+		return Math.round(getForm().flaeche() * getHoehe());
 	}
 
 	@Override
 	public double oberflaeche() {
-		return 2 * getForm().flaeche() + getForm().umfang() * getHoehe();
+		return Math.round(2 * getForm().flaeche() + getForm().umfang() * getHoehe());
 	}
 	
 	public double getHoehe() {
@@ -26,6 +26,11 @@ public class GeradesPrisma<F extends Form> extends Figur<F>{
 
 	private void setHoehe(double hoehe) {
 		this.hoehe = hoehe;
+	}
+
+	@Override
+	public String toCsvString() {
+		return "GeradesPrisma;"+volumen()+";"+oberflaeche()+";";
 	}
 
 }

@@ -12,6 +12,8 @@ public abstract class Figur<F extends Form> {
 	public abstract double volumen();
 	
 	public abstract double oberflaeche();
+	
+	public abstract String toCsvString();
 
 	public F getForm() {
 		return form;

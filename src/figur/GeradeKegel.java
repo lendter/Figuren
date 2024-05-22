@@ -14,4 +14,9 @@ public class GeradeKegel<F extends Kreis> extends Pyramide<F>{
 		double s = Math.sqrt(Math.pow(r, 2) + Math.pow(getHoehe(), 2));
 		return r * s * Math.PI;
 	}
+	
+	@Override
+	public String toCsvString() {
+		return "GeradeKegel;"+volumen()+";"+oberflaeche()+";";
+	}
 }

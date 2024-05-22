@@ -15,5 +15,9 @@ public class GeradePyramide<F extends Vieleck> extends Pyramide<Vieleck>{
 		double a = (getForm().umfang()/getForm().getNeckickgeit());
 		return getForm().getNeckickgeit() * 0.5 * a * s;
 	}
-
+	
+	@Override
+	public String toCsvString() {
+		return "GeradePyramide;"+volumen()+";"+oberflaeche()+";";
+	}
 }

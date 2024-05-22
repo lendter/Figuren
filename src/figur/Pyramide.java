@@ -12,7 +12,7 @@ public class Pyramide<F extends Form> extends Figur<F>{
 
 	@Override
 	public double volumen() {
-		return getForm().flaeche() * hoehe / 3;
+		return Math.round(getForm().flaeche() * hoehe / 3);
 	}
 
 	public double mantelflaeche() {
@@ -24,10 +24,15 @@ public class Pyramide<F extends Form> extends Figur<F>{
 	}
 	
 	public double oberflaeche() {
-		return mantelflaeche() + getForm().flaeche();
+		return Math.round(mantelflaeche() + getForm().flaeche());
 	}
 
 	private void setHoehe(double hoehe) {
 		this.hoehe = hoehe;
+	}
+	
+	@Override
+	public String toCsvString() {
+		return "Pyramide;"+volumen()+";"+oberflaeche()+";";
 	}
 }
